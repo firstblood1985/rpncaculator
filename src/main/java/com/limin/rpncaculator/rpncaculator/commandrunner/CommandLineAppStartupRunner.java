@@ -34,19 +34,19 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     public void run(String...args) throws Exception {
 
         while(true) {
-            String input_string = br.readLine().trim();
-            System.out.println("input is "+input_string);
+            String inputString = br.readLine().trim();
+            System.out.println("input is "+inputString);
 // need to support accurate position of the char....cannot do simple split
             StringBuilder sb = new StringBuilder();
             boolean start = false;
             boolean end =false;
 
-            if(null !=input_string && input_string.length()>0) {
+            if(null !=inputString && inputString.length()>0) {
                 int index = 1;
 
-                for (;index <= input_string.length(); index++) {
+                for (;index <= inputString.length(); index++) {
 
-                   char i = input_string.charAt(index-1);
+                   char i = inputString.charAt(index-1);
                     if (i == ' ' || i == '\t') {
                         if(true == start)
                         {
@@ -58,7 +58,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
                     }else{
                         start = true;
                         sb.append(i);
-                        if(index == input_string.length())
+                        if(index == inputString.length())
                         {
                             end = true;
                         }
@@ -96,12 +96,12 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
                 }
                 Iterator it = params.descendingIterator();
-                StringBuilder reverse_param = new StringBuilder();
+                StringBuilder reverseParam = new StringBuilder();
                 while(it.hasNext())
                 {
-                    reverse_param.append(it.next()+" ");
+                    reverseParam.append(it.next()+" ");
                 }
-                System.out.println("Stack: "+ reverse_param);
+                System.out.println("Stack: "+ reverseParam);
             }
         }
     }
