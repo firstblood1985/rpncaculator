@@ -79,12 +79,12 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
                                 if (Validation.SUCCESS == v) {
                                     params = op.operate(params, histories);
                                 } else {
-                                    Validation.printMessage(v, operator.getSymbol(), index);
+                                    Validation.printMessage(v, operator.getSymbol(), index-1);
                                     System.out.println("due to validation error, discarded rest and start new input");
                                     break;
                                 }
                             } else {
-                                System.out.println("unrecognized value: " + input + ", discarded and start new input");
+                                System.out.println("unrecognized value: " + input + ", discarded rest and start new input");
                                 break;
                             }
                         }
