@@ -1,5 +1,8 @@
 package com.limin.rpncaculator.rpncaculator.param;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+
 public class Param {
 
     private final String literal;
@@ -9,22 +12,34 @@ public class Param {
         this.literal = literal;
     }
 
-    public Param(float value)
+    public Param(double value)
     {
 
-        this.literal = String.valueOf(value);
+        //this.literal = String.valueOf(value);
+        this.literal = String.format("%.15f",value);
     }
 
-    public float toValue()
+    public double toValue()
     {
-        return (Float.valueOf(literal)).floatValue();
+
+        DecimalFormat df = new DecimalFormat("0.000000000000000");
+
+        //(Float.valueOf(literal)).floatValue();
+        try
+        {
+            double d =  df.parse(literal).doubleValue();
+            return d;
+        }catch (ParseException e) {
+            System.out.println(literal + " is not a valid number.");
+        }
+        return 0;
     }
 
     @Override
     public String toString() {
 
-        //check if literal to int is possible without losing accuracy
-        return literal;
+       String s = String.format("%.10f", (Double.valueOf(literal)).doubleValue());
+       return s = s.indexOf(".") < 0 ? s : s.replaceAll("0*$", "").replaceAll("\\.$", "");
     }
 
     public static boolean isParam(String p)
@@ -32,8 +47,7 @@ public class Param {
     //    return true;
         try
         {
-           // double d = Double.parseDouble(p);
-            float d = Float.parseFloat(p);
+            double d = Double.parseDouble(p);
         }
         catch(NumberFormatException nfe)
         {
